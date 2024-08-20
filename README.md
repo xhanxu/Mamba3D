@@ -26,7 +26,7 @@ This repository contains the official implementation of the paper:
 
 
 ## 📋 TODO
-- [√] Release the training and evaluation code
+- [x] Release the training and evaluation code
 - [ ] Release the pretrained weights
 - [ ] Release the toy code on Colab
 

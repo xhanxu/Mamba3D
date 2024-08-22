@@ -373,8 +373,8 @@ class Mamba3DBlock(nn.Module):
         x = x + self.drop_path(self.lfa(center, self.norm1(x))) # x: 32 129 384. center: 32 128 3
 
         # x + norm(x)->mamba(x)->dropout
-        # x = x + self.drop_path(self.mamba_shuffle(x))
-        x = x + self.drop_path(self.mixer(self.norm2(x)))
+        x = x + self.drop_path(self.mamba_shuffle(x))
+        # x = x + self.drop_path(self.mixer(self.norm2(x)))
     
         return x
 

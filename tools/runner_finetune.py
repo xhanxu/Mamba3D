@@ -24,34 +24,16 @@ from fvcore.nn import flop_count_table, flop_count_str
 
 train_transforms = transforms.Compose(
     [
-         # data_transforms.PointcloudScale(),
-         data_transforms.PointcloudRotate(),
-         # data_transforms.PointcloudTranslate(),
-         # data_transforms.PointcloudJitter(),
-         # data_transforms.PointcloudRandomInputDropout(),
-         # data_transforms.RandomHorizontalFlip(),
-        #  data_transforms.PointcloudScaleAndTranslate(), # default
+         data_transforms.PointcloudScaleAndTranslate(),
     ]
 )
 
 test_transforms = transforms.Compose(
     [
-        # data_transforms.PointcloudScale(),
-        data_transforms.PointcloudRotate(),
-        # data_transforms.PointcloudTranslate(),
-        # data_transforms.PointcloudScaleAndTranslate(), # default
+        data_transforms.PointcloudScaleAndTranslate(),
     ]
 )
 
-# if config.dataset.train._base_.NAME == "ModelNetFewShot": # ModelNet
-#     train_transforms = transforms.Compose([
-#         data_transforms.PointcloudRotate(),
-#         # data_transforms.PointcloudScaleAndTranslate(),
-#     ])
-# else:
-#     train_transforms = transforms.Compose([
-#         data_transforms.PointcloudRotate(),
-#     ])
 
 class Acc_Metric:
     def __init__(self, acc = 0.):

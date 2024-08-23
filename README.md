@@ -10,7 +10,7 @@ This repository contains the official implementation of the paper:
 
 
 ## 📰 News
-- [2024/8] We've slightly optimized the architecture, such as some normalization layers and hyperparameters, thus improving the accuracy of the model after pre-training.
+- [2024/8] We've slightly optimized the architecture, such as some normalization layers and hyperparameters.
 - [2024/8] We release the training and evaluation code! Pretrained weights are coming soon!
 - [2024/7] Our [MiniGPT-3D](https://github.com/tangyuan96/minigpt-3d) is also accepted by ACM MM24! We outperform existing large point-language models, using just about 1 day on 1 RTX 3090! Check it out!
 - [2024/7] Ours Mamba3D is accepted by ACM MM24!
@@ -64,28 +64,17 @@ More detailed settings can be found in [mamba3d.yaml](./mamba3d.yaml).
 We use ShapeNet, ScanObjectNN, ModelNet40 and ShapeNetPart in this work. See [DATASET.md](./DATASET.md) for details.
 
 
+## 🥧 3. Training from scratch
 
-## 🍔 3. Mamba3D Pre-training 
-To pre-train Mamba3D on ShapeNet, run:
-
+To train Mamba3D on ScanObjectNN/Modelnet40 from scratch, run:
 ```
-bash script/run_pretrain.sh
-
-# or
-
-CUDA_VISIBLE_DEVICES=<GPU> python main.py --config cfgs/pretrain.yaml --exp_name <output_file_name>
-```
-## 🥧 4. Mamba3D Fine-tuning 
-
-To fine-tune Mamba3D on ScanObjectNN/Modelnet40, run:
-```
-#Note: change config files for different dataset
-bash run_finetune.sh
+# Note: change config files for different dataset
+bash run_scratch.sh
 ```
 
 To vote on ScanObjectNN/Modelnet40, run:
 ```
-#Note: change config files for different dataset
+# Note: change config files for different dataset
 bash run_vote.sh
 ```
 Few-shot learning, run:

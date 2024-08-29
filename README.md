@@ -19,11 +19,6 @@ This repository contains the official implementation of the paper:
 <img src="media/mamba3d_total_v2.png" />
 </div>
 
-- [2024/4] Mamba3D surpasses Transformer-based counterparts and concurrent works in multiple tasks, achieving multiple SoTA, with linear complexity.
-<div style="text-align: center">
-<img src="media/flops_v2.png"  />
-</div>
-
 
 ## 📋 TODO
 - [x] Release the training and evaluation code

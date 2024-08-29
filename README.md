@@ -10,7 +10,6 @@ This repository contains the official implementation of the paper:
 
 
 ## 📰 News
-- [2024/8] We've slightly optimized the architecture, such as some normalization layers and hyperparameters.
 - [2024/8] We release the training and evaluation code! Pretrained weights are coming soon!
 - [2024/7] Our [MiniGPT-3D](https://github.com/tangyuan96/minigpt-3d) is also accepted by ACM MM24! We outperform existing large point-language models, using just about 1 day on 1 RTX 3090! Check it out!
 - [2024/7] Ours Mamba3D is accepted by ACM MM24!

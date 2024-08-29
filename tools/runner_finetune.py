@@ -22,17 +22,17 @@ import time
 from fvcore.nn import FlopCountAnalysis
 from fvcore.nn import flop_count_table, flop_count_str
 
-train_transforms = transforms.Compose(
-    [
-         data_transforms.PointcloudScaleAndTranslate(),
-    ]
-)
+# train_transforms = transforms.Compose(
+#     [
+#          data_transforms.PointcloudScaleAndTranslate(),
+#     ]
+# )
 
-test_transforms = transforms.Compose(
-    [
-        data_transforms.PointcloudScaleAndTranslate(),
-    ]
-)
+# test_transforms = transforms.Compose(
+#     [
+#         data_transforms.PointcloudScaleAndTranslate(),
+#     ]
+# )
 
 
 class Acc_Metric:
@@ -93,8 +93,8 @@ def calculate_total_param(base_model):
 def run_net(args, config, train_writer=None, val_writer=None):
     if config.dataset.train._base_.NAME == "ModelNet": # ModelNet
         train_transforms = transforms.Compose([
-            data_transforms.PointcloudRotate(),
-            # data_transforms.PointcloudScaleAndTranslate(),
+            # data_transforms.PointcloudRotate(),
+            data_transforms.PointcloudScaleAndTranslate(),
         ])
     else:
         train_transforms = transforms.Compose([
@@ -145,12 +145,6 @@ def run_net(args, config, train_writer=None, val_writer=None):
         base_model = nn.DataParallel(base_model).cuda()
     # optimizer & scheduler
     optimizer, scheduler = builder.build_opti_sche(base_model, config)
-    # ################# model statistics
-    # # stat(base_model, (8, config.model.num_group, 3)) 
-    # tem_x = torch.randn(8, config.model.num_group, 3)
-    # flops, params = profile(base_model, inputs = (tem_x,))
-    # print('FLOPs = ' + str(flops/1000**3) + 'G')
-    # print('Params = ' + str(params/1000**2) + 'M')
     
     if args.resume:
         builder.resume_optimizer(optimizer, args, logger = logger)
@@ -318,7 +312,7 @@ def validate(base_model, test_dataloader, epoch, val_writer, args, config, logge
 
             points = misc.fps(points, npoints) # 64 2048 3
 
-            # points = test_transforms(points) #新加的
+            # points = test_transforms(points) 
 
             logits = base_model(points)
             # print("Val input points shape: ",points.shape)
@@ -369,8 +363,8 @@ def validate(base_model, test_dataloader, epoch, val_writer, args, config, logge
 def validate_vote(base_model, test_dataloader, epoch, val_writer, args, config, logger = None, times = 10):
     if config.dataset.train._base_.NAME == "ModelNet": # ModelNet
         test_transforms = transforms.Compose([
-            data_transforms.PointcloudRotate(),
-            # data_transforms.PointcloudScaleAndTranslate(),
+            # data_transforms.PointcloudRotate(),
+            data_transforms.PointcloudScaleAndTranslate(),
         ])
     else:
         test_transforms = transforms.Compose([
@@ -519,8 +513,8 @@ def test(base_model, test_dataloader, args, config, logger = None):
 def test_vote(base_model, test_dataloader, epoch, val_writer, args, config, logger = None, times = 10):
     if config.dataset.train._base_.NAME == "ModelNet": # ModelNet
         test_transforms = transforms.Compose([
-            data_transforms.PointcloudRotate(),
-            # data_transforms.PointcloudScaleAndTranslate(),
+            # data_transforms.PointcloudRotate(),
+            data_transforms.PointcloudScaleAndTranslate(),
         ])
     else:
         test_transforms = transforms.Compose([

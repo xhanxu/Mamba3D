@@ -151,7 +151,7 @@ def selective_scan_ref(u, delta, A, B, C, D=None, z=None, delta_bias=None, delta
     out = out.to(dtype=dtype_in)
     return out if not return_last_state else (out, last_state)
 
-#用这个，正反分别过一次
+
 class MambaInnerFnNoOutProj(torch.autograd.Function):
 
     @staticmethod

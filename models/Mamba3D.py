@@ -551,7 +551,6 @@ class Mamba3D(nn.Module):
         # transformer
         x = self.blocks(center, x, pos) # enter transformer blocks
         x = self.norm(x)
-        # concat_f = torch.cat([x[:, 0], x[:, 1:].max(1)[0]], dim=-1) # default only maxpooling
         concat_f = torch.cat([x[:, 0], x[:, 1:].max(1)[0] + x[:, 1:].mean(1)[0]], dim=-1)
         ret = self.cls_head_finetune(concat_f)
         return ret   

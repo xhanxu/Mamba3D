@@ -10,6 +10,8 @@ This repository contains the official implementation of the paper:
 
 
 ## 📰 News
+- [2024/8] After optimizing the code and the model, Mamba3D can now achieve an overall accuracy of 92.05% on the ScanObjectNN(PB_T50_RS) dataset! We have also updated the results in the paper [here](https://arxiv.org/abs/2404.14966).
+- [2024/8] We release the pretrained weights [here](https://huggingface.co/hanx/Mamba3D)!
 - [2024/8] We release the training and evaluation code! Pretrained weights are coming soon!
 - [2024/7] Our [MiniGPT-3D](https://github.com/tangyuan96/minigpt-3d) is also accepted by ACM MM24! We outperform existing large point-language models, using just about 1 day on 1 RTX 3090! Check it out!
 - [2024/7] Ours Mamba3D is accepted by ACM MM24!
@@ -22,7 +24,7 @@ This repository contains the official implementation of the paper:
 
 ## 📋 TODO
 - [x] Release the training and evaluation code
-- [ ] Release the pretrained weights
+- [x] Release the pretrained weights
 - [ ] Release the toy code on Colab
 
 
@@ -53,29 +55,53 @@ pip install causal-conv1d==1.1.1
 
 More detailed settings can be found in [mamba3d.yaml](./mamba3d.yaml).
 
-## 🧾 2. Datasets 
+## 🧾 2. Datasets & Pretrained Weights
 
 We use ShapeNet, ScanObjectNN, ModelNet40 and ShapeNetPart in this work. See [DATASET.md](./DATASET.md) for details.
 
+You can find the pre-trained weights [here](https://huggingface.co/hanx/Mamba3D).
+Or, specifically as follows.
+| Dataset             | Pretrain | Acc   | Weight |
+|---------------------|----------|-------|--------|
+|ShapeNet             | Point-MAE|    |[ckpt](https://huggingface.co/hanx/Mamba3D/blob/main/pretrain_pointmae/ckpt-last.pth)   |  
+| ModelNet40          | no       | 93.4  | [ckpt](https://huggingface.co/hanx/Mamba3D/blob/main/modelnet40_scratch_93.4/ckpt-best.pth)    |
+| ModelNet40          | Point-MAE | 94.7  | [ckpt](https://huggingface.co/hanx/Mamba3D/blob/main/modelnet40_pointmae_94.7/ckpt-best.pth)    |
+| ScanObjectNN-hardest| no       | 91.81 | [ckpt](https://huggingface.co/hanx/Mamba3D/blob/main/scanobjectnn_hardest_scratch_91.81/ckpt-best-91.8.pth)    |
+| ScanObjectNN-hardest| Point-MAE | 92.05 | [ckpt](https://huggingface.co/hanx/Mamba3D/blob/main/scanobjectnn_hardest_pointmae_92.05/ckpt-best.pth)    |
 
 ## 🥧 3. Training from scratch
 
 To train Mamba3D on ScanObjectNN/Modelnet40 from scratch, run:
 ```
 # Note: change config files for different dataset
-bash run_scratch.sh
+bash script/run_scratch.sh
 ```
 
 To vote on ScanObjectNN/Modelnet40, run:
 ```
 # Note: change config files for different dataset
-bash run_vote.sh
+bash script/run_vote.sh
 ```
 Few-shot learning, run:
 ```
-bash run_fewshot.sh
+bash script/run_fewshot.sh
 ```
 
+<!-- ## 🐟 4. Pretraining & Finetuning -->
+## 🐟 4. Finetuning
+<!-- To pre-train Mamba3D on ShapeNet, run:
+
+```
+# Note: change config files for different dataset
+bash script/run_pretrain.sh
+# or
+CUDA_VISIBLE_DEVICES=<GPU> python main.py --config cfgs/pretrain.yaml --exp_name <output_file_name>
+``` -->
+To fine-tune Mamba3D on ScanObjectNN/Modelnet40, run:
+```
+# Note: change config files for different dataset
+bash script/run_finetune.sh
+```
 
 ## 😊 Acknowledgement
 We would like to thank the authors of [Mamba](https://github.com/state-spaces/mamba), [Vision Mamba](https://github.com/hustvl/Vim), and [Point-MAE](https://github.com/Pang-Yatian/Point-MAE) for their great works and repos.

@@ -61,61 +61,7 @@ def build_opti_sche(base_model, config):
     else:
         raise NotImplementedError()
     # '''
-    '''
-    opti_config = config.optimizer
-    opti_config.kwargs.lr = float(opti_config.kwargs.lr)
-    lr = opti_config.kwargs.lr
-    weight_decay = opti_config.kwargs.weight_decay
-    skip_list = ()
-
-    finetune_cls_decay = []
-    finetune_cls_no_decay = []
-    finetune_lfa_decay = []
-    finetune_lfa_no_decay = []
-    other_decay = []
-    other_no_decay = []
-
-    lr_ratio_cls = config.model.lr_ratio_cls
-    lr_ratio_lfa = config.model.lr_ratio_lfa
-    for name, param in base_model.module.named_parameters():
-        if not param.requires_grad:
-            continue  # frozen weights
-        if ('cls' in name) and ('PointMamba' in config.model.NAME):
-            if len(param.shape) == 1 or name.endswith(".bias") or 'token' in name or name in skip_list:
-                finetune_cls_no_decay.append(param)
-            else:
-                finetune_cls_decay.append(param)
-            print("%.1f * LR: " % (lr_ratio_cls), name)
-        elif ('lfa' in name) and ('PointMamba' in config.model.NAME):
-            if len(param.shape) == 1 or name.endswith(".bias") or 'token' in name or name in skip_list:
-                finetune_lfa_no_decay.append(param)
-            else:
-                finetune_lfa_decay.append(param)
-            print("%.1f * LR: " % (lr_ratio_lfa), name)        
-        elif len(param.shape) == 1 or name.endswith(".bias") or 'token' in name or name in skip_list:
-            other_no_decay.append(param)
-        else:
-            other_decay.append(param)
-    param_groups = [
-        {'params': finetune_cls_no_decay, 'weight_decay': 0., 'lr': lr * lr_ratio_cls},
-        {'params': finetune_cls_decay, 'weight_decay': weight_decay, 'lr': lr * lr_ratio_cls},
-        {'params': finetune_lfa_no_decay, 'weight_decay': 0., 'lr': lr * lr_ratio_lfa},
-        {'params': finetune_lfa_decay, 'weight_decay': weight_decay, 'lr': lr * lr_ratio_lfa},
-        {'params': other_no_decay, 'weight_decay': 0., 'lr': lr},
-        {'params': other_decay, 'weight_decay': weight_decay, 'lr': lr}
-    ]
-    if opti_config.type == 'AdamW':
-        optimizer = optim.AdamW(param_groups, **opti_config.kwargs)
-    elif opti_config.type == 'Adam':
-        optimizer = optim.Adam(param_groups, **opti_config.kwargs)
-    elif opti_config.type == 'RAdam':
-        optimizer = optim.RAdam(param_groups, **opti_config.kwargs)
-    elif opti_config.type == 'SGD':
-        optimizer = optim.SGD(param_groups, nesterov=True, **opti_config.kwargs)
-    else:
-        raise NotImplementedError()
-    '''
-
+    
     sche_config = config.scheduler
     if sche_config.type == 'LambdaLR':
         scheduler = build_lambda_sche(optimizer, sche_config.kwargs)  # misc.py

@@ -5,10 +5,10 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/mamba3d-enhancing-local-features-for-3d-point/3d-point-cloud-classification-on-scanobjectnn)](https://paperswithcode.com/sota/3d-point-cloud-classification-on-scanobjectnn?p=mamba3d-enhancing-local-features-for-3d-point)
 
 This repository contains the official implementation of the paper:
-
+  
 [**[ACM MM 24] Mamba3D: Enhancing Local Features for 3D Point Cloud Analysis via State Space Model**](https://arxiv.org/abs/2404.14966)
 
-
+ 
 ## 📰 News
 - [2024/8] After optimizing the code and the model, Mamba3D can now achieve an overall accuracy of 92.05% on the ScanObjectNN(PB_T50_RS) dataset! We have also updated the results in the paper [here](https://arxiv.org/abs/2404.14966).
 - [2024/8] We release the pretrained weights [here](https://huggingface.co/hanx/Mamba3D)!

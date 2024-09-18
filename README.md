@@ -51,6 +51,7 @@ pip install --upgrade https://github.com/unlimblue/KNN_CUDA/releases/download/0.
 
 # Mamba install
 pip install causal-conv1d==1.1.1
+pip install mamba-ssm==1.1.1
 ```
 
 More detailed settings can be found in [mamba3d.yaml](./mamba3d.yaml).

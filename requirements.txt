@@ -3,7 +3,7 @@ easydict
 h5py
 matplotlib
 numpy
-open3d==0.9
+open3d==0.16
 opencv-python
 pyyaml
 scipy
@@ -12,3 +12,4 @@ timm==0.4.12
 tqdm
 transforms3d
 termcolor
+mamba-ssm==1.1.1
